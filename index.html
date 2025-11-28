@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zenith Biocare | Portafolio académico</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --green-main: #2f6b41;
+      --green-light: #8abf86;
+      --green-soft: #d9eadf;
+      --bg: #f6f8f7;
+      --text-main: #203027;
+      --text-muted: #5c6b63;
+      --white: #ffffff;
+      --shadow-soft: 0 10px 24px rgba(0,0,0,0.06);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --transition-fast: 0.18s ease-out;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ========== HEADER ========== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1rem;
+    }
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .nav-left { justify-content: flex-start; }
+    .nav-right { justify-content: flex-end; }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+      transition: color var(--transition-fast), border-color var(--transition-fast);
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--green-main);
+      border-bottom-color: var(--green-main);
+    }
+
+    .logo-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .logo-img {
+      height: 46px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* Botón hamburguesa (oculto en desktop) */
+    .menu-toggle {
+      display: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(47,107,65,0.4);
+      background: var(--white);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--green-main);
+      position: relative;
+    }
+    .menu-toggle span::before,
+    .menu-toggle span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--green-main);
+    }
+    .menu-toggle span::before { top: -5px; }
+    .menu-toggle span::after  { top: 5px; }
+
+    /* Menú móvil desplegable */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 56px;          /* aprox altura de header */
+      left: 0;
+      right: 0;
+      background: var(--white);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      padding: 0.7rem 1.5rem 0.9rem;
+      z-index: 9;
+    }
+    .mobile-menu.open { display: block; }
+
+    .mobile-menu-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .mobile-link {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      padding: 0.6rem 0;           /* más aire vertical */
+    }
+    .mobile-link + .mobile-link {
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    /* ========== LAYOUT GENERAL ========== */
+    main {
+      max-width: 1200px;
+      margin: 1.7rem auto 3rem;
+      padding: 0 1.5rem;
+    }
+    section { margin-bottom: 3rem; }
+
+    .section-title {
+      font-size: 1.35rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    /* (línea izquierda eliminada) */
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 2.3rem;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      margin-bottom: 0.8rem;
+      color: var(--green-main);
+    }
+    .hero-title span { color: var(--green-light); }
+    .hero-text {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 38rem;
+      margin-bottom: 1.3rem;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .badge {
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green-main);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .hero-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem 1.2rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(47,107,65,0.08);
+      font-size: 0.88rem;
+    }
+    .hero-card h3 {
+      font-size: 0.98rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+    .hero-list {
+      list-style: none;
+      display: grid;
+      gap: 0.4rem;
+    }
+    .hero-list li::before {
+      content: "• ";
+      color: var(--green-main);
+    }
+
+    /* ========== PRODUCT GRID ========== */
+    #product-list { margin-top: 0.5rem; }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.3rem;
+    }
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(47,107,65,0.06);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform var(--transition-fast),
+                  box-shadow var(--transition-fast),
+                  border-color var(--transition-fast);
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.1);
+      border-color: var(--green-main);
+    }
+
+    .product-img-wrapper {
+      background: #eef4f0;
+      padding: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 170px;
+    }
+    .product-img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .product-body {
+      padding: 0.85rem 0.9rem 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      flex: 1;
+    }
+    .product-tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--green-light);
+      font-weight: 700;
+    }
+    .product-name {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .product-form {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .product-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+    .btn-detail {
+      margin-top: auto;
+      align-self: flex-start;
+      margin-top: 0.7rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--green-main);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast);
+    }
+    .btn-detail:hover {
+      background: #214b2f;
+      transform: translateY(-1px);
+    }
+
+    /* ========== PRODUCT DETAIL ========== */
+    #product-detail {
+      display: none;
+      margin-top: 2rem;
+    }
+    #product-detail.active { display: block; }
+
+    .detail-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.2rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+    .detail-title-block h2 {
+      font-size: 1.4rem;
+      color: var(--green-main);
+      margin-bottom: 0.15rem;
+    }
+    .detail-title-block h3 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+    .detail-short {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .detail-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.35rem;
+    }
+    .chip {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green-main);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .btn-back {
+      border-radius: 999px;
+      border: 1px solid rgba(47,107,65,0.35);
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      background: var(--white);
+      color: var(--green-main);
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: background var(--transition-fast), transform var(--transition-fast);
+    }
+    .btn-back:hover {
+      background: var(--green-soft);
+      transform: translateY(-1px);
+    }
+
+    .detail-layout {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(47,107,65,0.08);
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr);
+      gap: 1.5rem;
+      padding: 1.3rem 1.4rem;
+    }
+    .detail-image-wrap {
+      border-radius: var(--radius-md);
+      background: #eef4f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .detail-image {
+      max-width: 100%;
+      max-height: 260px;
+      object-fit: contain;
+    }
+
+    .detail-content {
+      display: grid;
+      gap: 0.7rem;
+    }
+    .detail-block h4 {
+      font-size: 0.96rem;
+      margin-bottom: 0.25rem;
+      color: var(--text-main);
+    }
+    .detail-block p,
+    .detail-block li {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+    .detail-block ul {
+      margin-left: 1rem;
+      display: grid;
+      gap: 0.25rem;
+      margin-top: 0.2rem;
+    }
+
+    .formula-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+      margin-top: 0.2rem;
+    }
+    .formula-table th,
+    .formula-table td {
+      padding: 0.2rem 0.35rem;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      text-align: left;
+    }
+    .formula-table th {
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .detail-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ========== ABOUT ========== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+    .about-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(47,107,65,0.06);
+      padding: 1.1rem 1.2rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .about-pill {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--green-main);
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #1e2b24;
+      color: #e4ece7;
+      padding: 1.8rem 1.5rem 1.3rem;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+      font-size: 0.85rem;
+    }
+    .footer-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+    .footer-text { color: #c9d6cd; margin-bottom: 0.35rem; }
+    .footer-links { display: grid; gap: 0.25rem; }
+    .footer-links a {
+      color: #c9d6cd;
+      transition: color var(--transition-fast);
+    }
+    .footer-links a:hover { color: var(--green-soft); }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 1.1rem auto 0;
+      font-size: 0.75rem;
+      color: #9fb2a4;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 992px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .detail-layout,
+      .about-grid,
+      .footer-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      main { padding: 0 1rem; }
+      .product-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero { margin-bottom: 1.6rem; }
+
+      /* Header móvil: logo centrado + hamburguesa derecha */
+      .header-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0.7rem 1rem;
+        display: flex;
+        justify-content: center;   /* logo centrado */
+        align-items: center;
+        position: relative;        /* referencia para el botón */
+      }
+
+      /* ocultar links de texto en móvil */
+      .nav-left,
+      .nav-right .nav-link {
+        display: none;
+      }
+
+      .logo-center {
+        flex: 0 0 auto;
+      }
+
+      .nav-right {
+        display: block;
+        justify-content: flex-end;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <nav class="nav-left">
+        <span class="nav-link active" data-scroll="#inicio">Inicio</span>
+      </nav>
+
+      <div class="logo-center">
+        <img src="logo.png" alt="Zenith Biocare" class="logo-img" />
+      </div>
+
+      <nav class="nav-right">
+        <span class="nav-link" data-scroll="#productos">Productos</span>
+        <span class="nav-link" data-scroll="#sobre-nosotros">Sobre nosotros</span>
+
+        <!-- Botón hamburguesa para móvil -->
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+          <span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Menú móvil desplegable -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-inner">
+      <span class="mobile-link" data-scroll="#inicio">Inicio</span>
+      <span class="mobile-link" data-scroll="#productos">Productos</span>
+      <span class="mobile-link" data-scroll="#sobre-nosotros">Sobre nosotros</span>
+    </div>
+  </div>
+
+  <main>
+    <!-- INICIO -->
+    <section id="inicio">
+      <div class="hero">
+        <div>
+          <h1 class="hero-title">
+            Desarrollo y formulación de productos<span> farmacéuticos.</span>
+          </h1>
+          <p class="hero-text">
+            Zenith Biocare presenta una línea de productos sólida elaborada con fines didácticos:
+            suplementos, antibióticos orales y mezclas herbolarias, diseñados para practicar
+            formulación, acondicionamiento y etiquetado bajo criterios de la NOM-072.
+          </p>
+          <div class="hero-badges">
+            <span class="badge">Formas sólidas orales</span>
+            <span class="badge">Etiquetado NOM-072</span>
+            <span class="badge">Proyecto universitario</span>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h3>Línea de productos</h3>
+          <ul class="hero-list">
+            <li><strong>Vitamina C 1,000 mg</strong> · Polvo efervescente en sobres.</li>
+            <li><strong>Oxitetraciclina 250 mg</strong> · Presentaciones en cápsulas y comprimidos.</li>
+            <li><strong>Herzon® mezcla herbolaria</strong> · A base de alcachofa y otras hierbas.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section id="productos">
+      <h2 class="section-title">Productos</h2>
+      <p class="section-subtitle">
+        Da clic en cualquiera de los productos para ver su ficha completa con descripción,
+        fórmula, instrucciones y advertencias.
+      </p>
+
+      <div id="product-list">
+        <div class="product-grid">
+          <!-- Vitamina C -->
+          <article class="product-card" data-product="vitamina">
+            <div class="product-img-wrapper">
+              <img src="vitamina.png" alt="Vitamina C 1,000 mg" class="product-img" />
+            </div>
+            <div class="product-body">
+              <span class="product-tag">Suplemento</span>
+              <h3 class="product-name">Vitamina C 1,000 mg</h3>
+              <p class="product-form">Polvo efervescente · caja con sobres de 5 g.</p>
+              <p class="product-meta">Suplemento alimenticio con 1,000 mg de ácido ascórbico.</p>
+              <button type="button" class="btn-detail">Ver detalles</button>
+            </div>
+          </article>
+
+          <!-- Oxi cápsulas 20 -->
+          <article class="product-card" data-product="oxi_caps">
+            <div class="product-img-wrapper">
+              <img src="biotren.png" alt="Oxitetraciclina 250 mg cápsulas" class="product-img" />
+            </div>
+            <div class="product-body">
+              <span class="product-tag">Antibiótico</span>
+              <h3 class="product-name">Oxitetraciclina 250 mg</h3>
+              <p class="product-form">Cápsulas · frasco con 20 cápsulas.</p>
+              <p class="product-meta">Formulación para prácticas de tecnología farmacéutica.</p>
+              <button type="button" class="btn-detail">Ver detalles</button>
+            </div>
+          </article>
+
+          <!-- Oxi comprimidos 50 -->
+          <article class="product-card" data-product="oxi_comp">
+            <div class="product-img-wrapper">
+              <img src="biotreeen.png" alt="Oxitetraciclina 250 mg comprimidos" class="product-img" />
+            </div>
+            <div class="product-body">
+              <span class="product-tag">Antibiótico</span>
+              <h3 class="product-name">Oxitetraciclina 250 mg</h3>
+              <p class="product-form">Comprimidos · frasco con 50 comprimidos.</p>
+              <p class="product-meta">Usado para evaluación de granulación y compresión.</p>
+              <button type="button" class="btn-detail">Ver detalles</button>
+            </div>
+          </article>
+
+          <!-- Herbolario -->
+          <article class="product-card" data-product="herbolario">
+            <div class="product-img-wrapper">
+              <img src="hierba.png" alt="Herzon mezcla herbolaria" class="product-img" />
+            </div>
+            <div class="product-body">
+              <span class="product-tag">Herbolario</span>
+              <h3 class="product-name">Herzon® mezcla herbolaria</h3>
+              <p class="product-form">Cápsulas · frasco con 50 cápsulas.</p>
+              <p class="product-meta">Mezcla herbolaria con alcachofa y otras plantas.</p>
+              <button type="button" class="btn-detail">Ver detalles</button>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- DETALLE -->
+      <div id="product-detail">
+        <div class="detail-header">
+          <div class="detail-title-block">
+            <h3 id="detail-brand"></h3>
+            <h2 id="detail-name"></h2>
+            <p class="detail-short" id="detail-short"></p>
+            <div class="detail-chip-row" id="detail-chips"></div>
+          </div>
+          <button class="btn-back" id="btn-back">← Volver al catálogo</button>
+        </div>
+
+        <div class="detail-layout">
+          <div class="detail-image-wrap">
+            <img id="detail-image" src="" alt="" class="detail-image" />
+          </div>
+
+          <div class="detail-content">
+            <div class="detail-block">
+              <h4>Descripción</h4>
+              <p id="detail-description"></p>
+            </div>
+
+            <div class="detail-block">
+              <h4>Fórmula por unidad</h4>
+              <table class="formula-table" id="detail-formula"></table>
+              <p class="detail-note" id="detail-formula-note"></p>
+            </div>
+
+            <div class="detail-block">
+              <h4>Instrucciones de uso</h4>
+              <ul id="detail-instructions"></ul>
+            </div>
+
+            <div class="detail-block">
+              <h4>Advertencias</h4>
+              <ul id="detail-warnings"></ul>
+            </div>
+
+            <div class="detail-block">
+              <h4>Datos técnicos</h4>
+              <ul id="detail-tech"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE NOSOTROS -->
+    <section id="sobre-nosotros">
+      <h2 class="section-title">Sobre nosotros</h2>
+      <p class="section-subtitle">
+        Zenith Biocare es un proyecto académico que integra formulación, diseño de empaque y 
+        cumplimiento normativo en productos farmacéuticos y herbolarios.
+      </p>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-pill">Quiénes somos</div>
+          <p>
+            Somos una empresa académica orientada al desarrollo de productos farmacéuticos
+            sólidos, suplementos y mezclas herbolarias, enfocada en la calidad del proceso
+            y en el etiquetado conforme a la NOM-072.
+          </p><br>
+          <p>
+            Cada uno de los productos mostrados se elaboró en laboratorio universitario como
+            parte de las asignaturas de Tecnología Farmacéutica y Farmacognosia.
+          </p>
+        </div>
+        <div class="about-card">
+          <div class="about-pill">En qué nos enfocamos</div>
+          <p>
+            • Desarrollo de comprimidos, cápsulas y polvos efervescentes.<br>
+            • Diseño de empaques primarios y secundarios con información regulatoria.<br>
+            • Trazabilidad completa: lote, fecha de fabricación y condiciones de almacenamiento.<br>
+            • Integración de identidad gráfica y comunicación clara al paciente.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-title">Zenith Biocare</div>
+        <p class="footer-text">
+          Portafolio académico de formulaciones farmacéuticas y herbolarias
+          desarrolladas en entorno universitario.
+        </p>
+        <p class="footer-text">
+          El contenido se utiliza sólo con fines didácticos y no constituye
+          promoción de productos comerciales reales.
+        </p>
+      </div>
+
+      <div>
+        <div class="footer-title">Navegación</div>
+        <div class="footer-links">
+          <a href="#inicio">Inicio</a>
+          <a href="#productos">Productos</a>
+          <a href="#sobre-nosotros">Sobre nosotros</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-title">Contacto académico</div>
+        <p class="footer-text">Proyecto de Tecnología Farmacéutica / Farmacognosia.</p>
+        <p class="footer-text">correo-ejemplo@zenithbiocare.edu</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 Zenith Biocare · Proyecto académico.</span>
+      <span>Diseño responsivo · PC y móvil.</span>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // scroll suave (desktop nav)
+    document.querySelectorAll(".nav-link[data-scroll]").forEach(link => {
+      link.addEventListener("click", () => {
+        const target = document.querySelector(link.dataset.scroll);
+        if (target) {
+          window.scrollTo({ top: target.offsetTop - 80, behavior: "smooth" });
+        }
+        document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
+        link.classList.add("active");
+      });
+    });
+
+    // Menú móvil
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("open");
+      });
+
+      document.querySelectorAll(".mobile-link[data-scroll]").forEach(link => {
+        link.addEventListener("click", () => {
+          const target = document.querySelector(link.dataset.scroll);
+          if (target) {
+            window.scrollTo({ top: target.offsetTop - 80, behavior: "smooth" });
+          }
+          mobileMenu.classList.remove("open");
+        });
+      });
+    }
+
+    // Datos de productos (igual que antes)
+    const products = {
+      vitamina: {
+        brand: "Zenith Biocare",
+        name: "Vitamina C 1,000 mg",
+        short: "Polvo efervescente · suplemento alimenticio · sobres de 5 g.",
+        chips: ["Suplemento", "Sobres", "Vía oral"],
+        image: "vitamina.png",
+        description:
+          "Polvo efervescente saborizado con 1,000 mg de vitamina C por sobre. " +
+          "Formulado como suplemento alimenticio para prácticas de Tecnología Farmacéutica " +
+          "y ejercicios de etiquetado conforme a la NOM-072.",
+        formulaNote: "Fórmula correspondiente a un sobre de 5 g.",
+        formula: [
+          ["Vitamina C (ácido ascórbico)", "1,000 mg"],
+          ["Ácido cítrico", "800 mg"],
+          ["Ácido tartárico", "625 mg"],
+          ["Bicarbonato de sodio", "2,568 mg"],
+          ["Endulcorantes", "5 mg"],
+          ["Saborizante", "1 mg"],
+          ["Colorante", "1 mg"]
+        ],
+        instructions: [
+          "Disolver el contenido de un sobre en 200 mL de agua.",
+          "No ingerir el polvo sin disolver.",
+          "Utilizar 1 sobre al día, salvo indicación diferente del docente."
+        ],
+        warnings: [
+          "No exceder la porción diaria recomendada.",
+          "No se deje al alcance de los niños.",
+          "Consérvese en un lugar fresco y seco.",
+          "Este producto es un suplemento alimenticio y no es un medicamento."
+        ],
+        tech: [
+          "Presentación de ejemplo: caja con 6 sobres de 5 g.",
+          "Lote de ejemplo: 25VC10-01.",
+          "Fecha de fabricación académica: 03 OCT 2025.",
+          "Caducidad de ejemplo: OCT 2026."
+        ]
+      },
+      oxi_caps: {
+        brand: "Zenith Biocare",
+        name: "Oxitetraciclina 250 mg",
+        short: "Cápsulas · frasco con 20 cápsulas.",
+        chips: ["Antibiótico", "Cápsulas", "Uso académico"],
+        image: "biotren.png",
+        description:
+          "Cápsulas de oxitetraciclina 250 mg desarrolladas para prácticas de " +
+          "formulación y encapsulado. Producto de uso exclusivamente académico; " +
+          "no destinado a uso terapéutico real.",
+        formulaNote: "Fórmula por cápsula de 250 mg de oxitetraciclina.",
+        formula: [
+          ["Oxitetraciclina", "250 mg"],
+          ["Celulosa microcristalina", "486 mg"],
+          ["Lactosa", "323 mg"],
+          ["Croscarmelosa de sodio", "25 mg"],
+          ["Dióxido de silicio", "10 mg"],
+          ["Estearato de magnesio", "6 mg"]
+        ],
+        instructions: [
+          "Producto para demostración en laboratorio académico.",
+          "La dosis teórica es la que el médico señale en un contexto clínico real.",
+          "Manipular siguiendo las indicaciones del docente y las normas de bioseguridad."
+        ],
+        warnings: [
+          "No administrar a pacientes reales.",
+          "No se deje al alcance de los niños.",
+          "Consérvese en lugar fresco, seco y protegido de la luz.",
+          "La versión comercial requiere receta médica."
+        ],
+        tech: [
+          "Presentación: frasco con 20 cápsulas.",
+          "Lote de ejemplo: 25OX10-02.",
+          "Fecha de fabricación académica: 17 OCT 2025.",
+          "Caducidad de ejemplo: OCT 2026."
+        ]
+      },
+      oxi_comp: {
+        brand: "Zenith Biocare",
+        name: "Oxitetraciclina 250 mg",
+        short: "Comprimidos · frasco con 50 comprimidos.",
+        chips: ["Antibiótico", "Comprimidos", "Uso académico"],
+        image: "biotreeen.png",
+        description:
+          "Comprimidos de oxitetraciclina 250 mg elaborados para prácticas de " +
+          "granulación húmeda, compresión y evaluación de calidad física. " +
+          "Formulación diseñada con fines didácticos.",
+        formulaNote: "Fórmula por comprimido de aproximadamente 1.1 g.",
+        formula: [
+          ["Oxitetraciclina", "250 mg"],
+          ["Celulosa microcristalina", "486 mg"],
+          ["Lactosa", "323 mg"],
+          ["Croscarmelosa de sodio", "25 mg"],
+          ["Dióxido de silicio", "10 mg"],
+          ["Estearato de magnesio", "6 mg"],
+          ["Aglutinante (almidón coprocesado)", "c.b.p. 1 comprimido"]
+        ],
+        instructions: [
+          "Uso exclusivo en actividades de laboratorio.",
+          "Registrar lote, fecha de fabricación y condiciones de almacenamiento.",
+          "La dosis clínica real debe ser determinada por un médico."
+        ],
+        warnings: [
+          "No utilizar en seres humanos ni animales.",
+          "No se deje al alcance de los niños.",
+          "Consérvese en lugar fresco y seco, protegido de la luz.",
+          "Su versión comercial es de uso bajo prescripción médica."
+        ],
+        tech: [
+          "Presentación: frasco con 50 comprimidos.",
+          "Lote de ejemplo: 25OX10-01.",
+          "Fecha de fabricación académica: 07 NOV 2025.",
+          "Caducidad de ejemplo: NOV 2026."
+        ]
+      },
+      herbolario: {
+        brand: "Zenith Biocare",
+        name: "Herzon® mezcla herbolaria",
+        short: "Cápsulas · frasco con 50 cápsulas.",
+        chips: ["Herbolario", "Alcachofa", "Vía oral"],
+        image: "hierba.png",
+        description:
+          "Mezcla herbolaria en cápsulas a base de alcachofa (Cynara scolymus) y otras " +
+          "plantas tradicionalmente utilizadas como auxiliares en la digestión y apoyo " +
+          "al funcionamiento hepático. Formulación para demostración académica.",
+        formulaNote: "Fórmula cualitativa por cápsula.",
+        formula: [
+          ["Extracto seco de alcachofa (Cynara scolymus)", "c.s."],
+          ["Diente de león", "c.s."],
+          ["Boldo", "c.s."],
+          ["Menta", "c.s."],
+          ["Excipiente", "c.b.p. 1 cápsula"]
+        ],
+        instructions: [
+          "En el contexto tradicional se propone 1 cápsula cada 12 horas.",
+          "Acompañar con suficiente agua.",
+          "Utilizar solo como parte de la práctica académica."
+        ],
+        warnings: [
+          "No usar en embarazo ni lactancia.",
+          "No administrar en menores sin supervisión profesional.",
+          "Si se presentan molestias gastrointestinales suspender su uso.",
+          "No se deje al alcance de los niños."
+        ],
+        tech: [
+          "Presentación: frasco con 50 cápsulas.",
+          "Lote de ejemplo: 25HB10-01.",
+          "Fecha de fabricación académica: 22 OCT 2025.",
+          "Caducidad de ejemplo: OCT 2026."
+        ]
+      }
+    };
+
+    const productList = document.getElementById("product-list");
+    const productDetail = document.getElementById("product-detail");
+    const detailBrand = document.getElementById("detail-brand");
+    const detailName = document.getElementById("detail-name");
+    const detailShort = document.getElementById("detail-short");
+    const detailChips = document.getElementById("detail-chips");
+    const detailImage = document.getElementById("detail-image");
+    const detailDescription = document.getElementById("detail-description");
+    const detailFormula = document.getElementById("detail-formula");
+    const detailFormulaNote = document.getElementById("detail-formula-note");
+    const detailInstructions = document.getElementById("detail-instructions");
+    const detailWarnings = document.getElementById("detail-warnings");
+    const detailTech = document.getElementById("detail-tech");
+    const btnBack = document.getElementById("btn-back");
+
+    function renderProduct(id) {
+      const p = products[id];
+      if (!p) return;
+
+      detailBrand.textContent = p.brand;
+      detailName.textContent = p.name;
+      detailShort.textContent = p.short;
+      detailImage.src = p.image;
+      detailImage.alt = p.name;
+
+      detailChips.innerHTML = "";
+      p.chips.forEach(c => {
+        const chip = document.createElement("span");
+        chip.className = "chip";
+        chip.textContent = c;
+        detailChips.appendChild(chip);
+      });
+
+      detailDescription.textContent = p.description;
+
+      detailFormula.innerHTML = "<tr><th>Componente</th><th>Cantidad</th></tr>";
+      p.formula.forEach(row => {
+        const tr = document.createElement("tr");
+        const td1 = document.createElement("td");
+        const td2 = document.createElement("td");
+        td1.textContent = row[0];
+        td2.textContent = row[1];
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        detailFormula.appendChild(tr);
+      });
+      detailFormulaNote.textContent = p.formulaNote || "";
+
+      detailInstructions.innerHTML = "";
+      p.instructions.forEach(txt => {
+        const li = document.createElement("li");
+        li.textContent = txt;
+        detailInstructions.appendChild(li);
+      });
+
+      detailWarnings.innerHTML = "";
+      p.warnings.forEach(txt => {
+        const li = document.createElement("li");
+        li.textContent = txt;
+        detailWarnings.appendChild(li);
+      });
+
+      detailTech.innerHTML = "";
+      p.tech.forEach(txt => {
+        const li = document.createElement("li");
+        li.textContent = txt;
+        detailTech.appendChild(li);
+      });
+    }
+
+    document.querySelectorAll(".product-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const id = card.dataset.product;
+        renderProduct(id);
+        productList.style.display = "none";
+        productDetail.classList.add("active");
+        window.scrollTo({
+          top: document.getElementById("productos").offsetTop - 80,
+          behavior: "smooth"
+        });
+      });
+    });
+
+    btnBack.addEventListener("click", () => {
+      productDetail.classList.remove("active");
+      productList.style.display = "block";
+      window.scrollTo({
+        top: document.getElementById("productos").offsetTop - 80,
+        behavior: "smooth"
+      });
+    });
+  </script>
+</body>
+</html>
